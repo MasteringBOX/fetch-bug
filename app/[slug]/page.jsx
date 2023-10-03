@@ -1,7 +1,7 @@
 export const dynamicParams = false;
 
 async function getData() {
-    const res = await fetch('https://www.masteringbox.com/api/wp/v2/posts?per_page=5&page=1') // This API call should be called only ONCE.
+    const res = await fetch('https://www.masteringbox.com/api/wp/v2/posts?per_page=5&page=1') // This API call should be called only ONCE. TODO Change to your own API to check server access logs.
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
@@ -28,6 +28,8 @@ export default async function page({params: {slug}}) {
      *  In 13.4.3 works ok in local with Node 20.6.1 and Node 18.2.1. In Vercel it does 2 API calls instead of 1 (but not 11).
      *  In a more complex app, Vercel does a lot of unnecessary calls. You can check a project that is a little bit more complex https://github.com/MasteringBOX/fetch-cache-bug to showcase the issue.
      */
-    const post = posts.find(post => post.slug === slug);
-    return <div>{post.title.rendered}</div>
+
+        // You can comment this out.
+    const post = posts.find(post => post.slug === slug); // Filter post.
+    return <div>{post.title.rendered}</div> // Show title.
 }
